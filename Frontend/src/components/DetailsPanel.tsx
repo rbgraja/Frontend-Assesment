@@ -120,7 +120,7 @@ function DetailsPanel({ loading = false, contactId, activeFilter, channels, onCh
   }
 
   return (
-    <aside className="h-full min-h-0 rounded-[32px] bg-white shadow-soft overflow-hidden">
+    <aside className="h-full min-h-0 rounded-[7px] bg-white shadow-soft overflow-hidden">
       <div className="mb-6 flex items-center justify-between border-b border-slate-200 p-[21px]">
         <div className="text-lg font-semibold tracking-tight text-slate-900">
           Details

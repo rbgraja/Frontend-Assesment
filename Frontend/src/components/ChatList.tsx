@@ -15,7 +15,24 @@ interface ChatListProps {
   activeInbox: string;
   activeFilter: ActiveFilter;
 }
+const getColorFromName = (name: string) => {
+ const colors = [
+  "bg-red-600 text-white",
+  "bg-blue-600 text-white",
+  "bg-green-600 text-white",
+  "bg-yellow-500 text-black",
+  "bg-purple-600 text-white",
+  "bg-pink-600 text-white",
+  "bg-indigo-600 text-white",
+];
 
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  return colors[Math.abs(hash) % colors.length];
+};
 function getStatusColor(status: string) {
   switch (status) {
     case 'online':
@@ -92,7 +109,7 @@ function ChatList({ loading = false, contacts, channels, selectedContactId, onCo
   }
 
  return (
-  <section className="rounded-[32px] bg-white shadow-soft">
+  <section className=" bg-white shadow-soft">
 
     {/* HEADER */}
     <div className="mb-6 flex items-center justify-between p-[21px] border-b border-slate-200 pb-5">
@@ -199,7 +216,7 @@ function ChatList({ loading = false, contacts, channels, selectedContactId, onCo
               }`}
             >
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 flex items-center justify-center rounded-full bg-[#ede9ff] text-[#5b46ff]">
+                <div className={`h-10 w-10 flex items-center justify-center rounded-full ${getColorFromName(channel.name)}`}>
                   {channel.name.charAt(0)}
                 </div>
 
@@ -228,7 +245,7 @@ ${
             >
               <div className="flex items-center gap-3">
 
-                <div className="h-10 w-10 flex items-center justify-center rounded-full bg-[#ede9ff] text-[#5b46ff] relative">
+                <div className={`h-10 w-10 flex items-center justify-center rounded-full ${getColorFromName(contact.name)} relative`}>
                   {contact.avatar}
                   <span
                     className={`absolute -bottom-1 -right-1 h-3 w-3 rounded-full ${getStatusColor(
@@ -240,16 +257,16 @@ ${
                 <div>
                   <div className="text-sm font-semibold text-slate-900 flex gap-2">
                     {contact.name}
-                    <span className="text-xs text-slate-400">
-                      {contact.time}
-                    </span>
+
                   </div>
                   <p className="text-xs text-slate-500">
                     {contact.lastMessage}
                   </p>
                 </div>
               </div>
-
+                                    <span className="text-xs text-slate-400">
+                      {contact.time}
+                    </span>
               {contact.unread > 0 && (
                 <span className=" px-2 py-1 text-xs font-semibold ">
                   {contact.unread}

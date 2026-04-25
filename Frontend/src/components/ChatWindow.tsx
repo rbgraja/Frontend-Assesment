@@ -90,6 +90,7 @@ function ChatBubble({
     <div className={`flex w-full ${isMe ? 'justify-end' : 'justify-start'}`}>
       
       {/* Message container */}
+      
       <div className={`flex  gap-2 max-w-[75%] ${isMe ? 'flex-row-reverse' : ''}`}>
         
         {/* Bubble */}
@@ -174,7 +175,7 @@ function ChatWindow({ loading = false, contact, messages, onSendMessage }: ChatW
 
   if (loading) {
     return (
-      <section className="rounded-[32px] bg-white p-6 shadow-soft">
+      <section className="rounded-[7px] bg-white p-6 shadow-soft">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <Skeleton className="h-4 w-44 mb-3" />
@@ -210,7 +211,7 @@ function ChatWindow({ loading = false, contact, messages, onSendMessage }: ChatW
   }
 
   return (
-    <section className="h-full rounded-[32px] bg-white  shadow-soft flex flex-col">
+    <section className="max-h-[900px] rounded-[7px] bg-white  shadow-soft flex flex-col">
       <div className="mb-6 flex flex-wrap items-center p-[21px] justify-between gap-4 border-b border-slate-200 pb-5">
         <div>
           <div className="text-lg font-semibold tracking-tight text-slate-900">{contact?.name ?? 'Loading...'}</div>

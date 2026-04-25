@@ -183,7 +183,7 @@ function App() {
     <div className="bg-[#eff3fa]">
       <section className="min-h-screen p-4 sm:p-6">
         <Navbar loading={loading} />
-        <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_320px_minmax(0,1fr)_320px]">
+        <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_320px_minmax(0,1fr)_320px]">
           <Sidebar
             loading={loading}
             contacts={contacts}
