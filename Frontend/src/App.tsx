@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import ChatList from './components/ChatList';
 import ChatWindow from './components/ChatWindow';
 import DetailsPanel from './components/DetailsPanel';
+import AssessmentDashboard from './components/AssessmentDashboard';
 import {
   Conversation,
   Channel,
@@ -23,6 +24,7 @@ function App() {
   const [activeInbox, setActiveInbox] = useState('My Inbox');
   const [activeFilter, setActiveFilter] = useState<{ type: 'none' | 'team' | 'user' | 'channel'; value: string }>({ type: 'none', value: '' });
   const [messages, setMessages] = useState<Record<string, Message[]>>({});
+  const [page, setPage] = useState<'assessment' | 'chat'>('assessment');
 
   useEffect(() => {
     const loadData = async () => {
@@ -173,32 +175,38 @@ function App() {
     return () => window.clearTimeout(replyTimeout);
   };
 
+  if (page === 'assessment') {
+    return <AssessmentDashboard onOpenNextPage={() => setPage('chat')} />;
+  }
+
   return (
-    <div className="min-h-screen bg-[#eff3fa] p-4 sm:p-6">
-      <Navbar loading={loading} />
-      <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-full gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_320px_minmax(0,1fr)_320px]">
-        <Sidebar
-          loading={loading}
-          contacts={contacts}
-          channels={channels}
-          activeInbox={activeInbox}
-          onInboxChange={setActiveInbox}
-          activeFilter={activeFilter}
-          onFilterChange={handleFilterChange}
-        />
-        <ChatList
-          loading={loading}
-          contacts={contacts}
-          channels={channels}
-          selectedContactId={selectedContactId}
-          onContactSelect={handleContactSelect}
-          onChannelSelect={handleChannelSelect}
-          activeInbox={activeInbox}
-          activeFilter={activeFilter}
-        />
-        <ChatWindow loading={chatLoading} contact={activeConversation} messages={chatMessages} onSendMessage={handleSendMessage} />
-        <DetailsPanel loading={loading} contactId={selectedContactId} activeFilter={activeFilter} channels={channels} onChannelSelect={handleChannelSelect} />
-      </div>
+    <div className="bg-[#eff3fa]">
+      <section className="min-h-screen p-4 sm:p-6">
+        <Navbar loading={loading} />
+        <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_320px_minmax(0,1fr)_320px]">
+          <Sidebar
+            loading={loading}
+            contacts={contacts}
+            channels={channels}
+            activeInbox={activeInbox}
+            onInboxChange={setActiveInbox}
+            activeFilter={activeFilter}
+            onFilterChange={handleFilterChange}
+          />
+          <ChatList
+            loading={loading}
+            contacts={contacts}
+            channels={channels}
+            selectedContactId={selectedContactId}
+            onContactSelect={handleContactSelect}
+            onChannelSelect={handleChannelSelect}
+            activeInbox={activeInbox}
+            activeFilter={activeFilter}
+          />
+          <ChatWindow loading={chatLoading} contact={activeConversation} messages={chatMessages} onSendMessage={handleSendMessage} />
+          <DetailsPanel loading={loading} contactId={selectedContactId} activeFilter={activeFilter} channels={channels} onChannelSelect={handleChannelSelect} />
+        </div>
+      </section>
     </div>
   );
 }

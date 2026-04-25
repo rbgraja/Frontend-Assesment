@@ -31,3 +31,129 @@ body {
 .scrollbar-thin::-webkit-scrollbar-track {
   background: transparent;
 }
+
+.ring-glow {
+  box-shadow:
+    0 0 35px rgba(68, 152, 255, 0.52),
+    0 0 62px rgba(19, 116, 255, 0.45),
+    inset 0 0 30px rgba(18, 102, 255, 0.32);
+  animation: pulseRing 3.8s ease-in-out infinite, rotateRing 12s linear infinite;
+}
+
+.ring-glow::before,
+.ring-glow::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 999px;
+  border: 1px solid rgba(98, 173, 255, 0.35);
+  animation: pulseRing 4.1s ease-in-out infinite;
+}
+
+.ring-glow::after {
+  inset: -28px;
+  border-color: rgba(91, 165, 255, 0.23);
+  animation-duration: 4.6s;
+}
+
+.honeycomb {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.honeycomb:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.honeycomb.to-inbox {
+  animation: routeToInbox 0.68s ease forwards;
+}
+
+.honeycomb.to-contacts {
+  animation: routeToContacts 0.68s ease forwards;
+}
+
+.honeycomb.to-employees {
+  animation: routeToEmployees 0.68s ease forwards;
+}
+
+.honeycomb.to-workflows {
+  animation: routeToWorkflows 0.68s ease forwards;
+}
+
+.honeycomb.to-campaigns {
+  animation: routeToCampaigns 0.68s ease forwards;
+}
+
+@keyframes pulseRing {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes rotateRing {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes routeToInbox {
+  to {
+    transform: translate(-560%, 280%) scale(0.6);
+    opacity: 0;
+  }
+}
+
+@keyframes routeToContacts {
+  to {
+    transform: translate(-230%, 280%) scale(0.6);
+    opacity: 0;
+  }
+}
+
+@keyframes routeToEmployees {
+  to {
+    transform: translate(40%, 280%) scale(0.6);
+    opacity: 0;
+  }
+}
+
+@keyframes routeToWorkflows {
+  to {
+    transform: translate(230%, 280%) scale(0.6);
+    opacity: 0;
+  }
+}
+
+@keyframes routeToCampaigns {
+  to {
+    transform: translate(560%, 280%) scale(0.6);
+    opacity: 0;
+  }
+}
+
+@keyframes populate {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
