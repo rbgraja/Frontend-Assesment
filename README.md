@@ -31,7 +31,18 @@ https://raja-abdulrehman-frontendassesment.vercel.app/
 - 🖼️ Asset handling via `public`  
 - 🚀 Deployed on Vercel with auto CI/CD  
 
----
+## 📁 Project Structure
+public/ # Contains static images and assets
+src/
+├── api/ # Dummy API logic and services
+├── components/ # Reusable UI components
+├── data/ # Static / dummy data files
+├── types/ # TypeScript type definitions
+├── App.tsx # Root component
+└── main.tsx # Entry point
+
+
+
 
 ⚙️ Setup Instructions
 1. Clone repository
