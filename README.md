@@ -33,9 +33,6 @@ https://raja-abdulrehman-frontendassesment.vercel.app/
 
 ---
 
-## 📁 Project Structure
-
-
 ⚙️ Setup Instructions
 1. Clone repository
 git clone https://github.com/rbgraja/Frontend-Assesment/
