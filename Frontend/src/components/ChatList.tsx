@@ -109,7 +109,7 @@ function ChatList({ loading = false, contacts, channels, selectedContactId, onCo
   }
 
  return (
-  <section className=" bg-white shadow-soft">
+  <section className=" h-full min-h-0 bg-white shadow-soft">
 
     {/* HEADER */}
     <div className="mb-6 flex items-center justify-between p-[21px] border-b border-slate-200 pb-5">
