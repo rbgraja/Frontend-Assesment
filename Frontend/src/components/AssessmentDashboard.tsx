@@ -379,9 +379,21 @@ function LivePanel({
   error?: string;
 }) {
   return (
-    <div className="h-full">
-      <img src="/dashboard.PNG" alt="" className="w-full h-auto object-contain" />
-    </div>
+<div className="h-full">
+  {/* Mobile image (below sm) */}
+  <img
+    src="/mobile.view.PNG"
+    alt=""
+    className="w-full h-auto object-contain block sm:hidden"
+  />
+
+  {/* Desktop image (sm and above) */}
+  <img
+    src="/dashboard.PNG"
+    alt=""
+    className="w-full h-auto object-contain hidden sm:block"
+  />
+</div>
   );
 }
 
