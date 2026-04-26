@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { FiChevronDown, FiUsers, FiMail, FiBox, FiUser  } from 'react-icons/fi';
+import { FiChevronDown, FiUsers, FiUser  } from 'react-icons/fi';
 import { UserCircle2,User ,CircleUserRound  } from 'lucide-react';
 import { Channel, Conversation } from '../api/dummyApi';
 import { Skeleton } from './Skeleton';
@@ -12,6 +12,8 @@ type SidebarProps = {
   onInboxChange: (value: string) => void;
   activeFilter: { type: 'none' | 'team' | 'user' | 'channel'; value: string };
   onFilterChange: (filter: { type: 'none' | 'team' | 'user' | 'channel'; value: string }) => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 };
 
 const InboxIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -49,7 +51,7 @@ const UnassignedIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 );
 
-function Sidebar({ loading = false, contacts, channels, activeInbox, onInboxChange, activeFilter, onFilterChange }: SidebarProps) {
+function Sidebar({ loading = false, contacts, channels, activeInbox, onInboxChange, activeFilter, onFilterChange, isOpen = false, onClose }: SidebarProps) {
   const [selectedNav, setSelectedNav] = useState(activeInbox);
   const [sections, setSections] = useState({ teams: true, users: true, channels: true });
 
@@ -119,7 +121,17 @@ function Sidebar({ loading = false, contacts, channels, activeInbox, onInboxChan
   }
 
   return (
-    <aside className="bg-[#FAFAF8] p-6 shadow-soft">
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={onClose}
+        />
+      )}
+      <aside className={`bg-[#FAFAF8] overflow-y-scroll p-6 shadow-soft fixed left-0 top-0 h-full w-80 z-50 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:h-auto md:w-auto md:shadow-soft ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
       <div className="mb-8">
         <h1 className="text-3xl font-semibold text-slate-900">Inbox</h1>
       </div>
@@ -291,6 +303,7 @@ function Sidebar({ loading = false, contacts, channels, activeInbox, onInboxChan
         )}
       </div>
     </aside>
+    </>
   );
 }
 

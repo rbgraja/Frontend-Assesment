@@ -25,6 +25,8 @@ function App() {
   const [activeFilter, setActiveFilter] = useState<{ type: 'none' | 'team' | 'user' | 'channel'; value: string }>({ type: 'none', value: '' });
   const [messages, setMessages] = useState<Record<string, Message[]>>({});
   const [page, setPage] = useState<'assessment' | 'chat'>('assessment');
+  const [mobileView, setMobileView] = useState<'list' | 'chat'>('list');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -116,6 +118,16 @@ function App() {
     setActiveFilter({ type: 'none', value: '' });
     setSelectedContactId(contactId);
     markContactAsRead(contactId);
+    setMobileView('chat');
+  };
+
+  const handleBackToList = () => {
+    setMobileView('list');
+    setSelectedContactId('');
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
   const handleFilterChange = (filter: { type: 'none' | 'team' | 'user' | 'channel'; value: string }) => {
@@ -182,29 +194,39 @@ function App() {
   return (
     <div className="bg-[#eff3fa]">
       <section className="min-h-screen p-4 sm:p-6">
-        <Navbar loading={loading} />
+        <Navbar loading={loading} mobileView={mobileView} selectedContact={activeConversation} onBack={handleBackToList} sidebarOpen={sidebarOpen} onToggleSidebar={toggleSidebar} />
         <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_320px_minmax(0,1fr)_320px]">
-          <Sidebar
-            loading={loading}
-            contacts={contacts}
-            channels={channels}
-            activeInbox={activeInbox}
-            onInboxChange={setActiveInbox}
-            activeFilter={activeFilter}
-            onFilterChange={handleFilterChange}
-          />
-          <ChatList
-            loading={loading}
-            contacts={contacts}
-            channels={channels}
-            selectedContactId={selectedContactId}
-            onContactSelect={handleContactSelect}
-            onChannelSelect={handleChannelSelect}
-            activeInbox={activeInbox}
-            activeFilter={activeFilter}
-          />
-          <ChatWindow loading={chatLoading} contact={activeConversation} messages={chatMessages} onSendMessage={handleSendMessage} />
-          <DetailsPanel loading={loading} contactId={selectedContactId} activeFilter={activeFilter} channels={channels} onChannelSelect={handleChannelSelect} />
+          <div className={`${mobileView === 'chat' ? 'hidden md:block' : ''}`}>
+            <Sidebar
+              loading={loading}
+              contacts={contacts}
+              channels={channels}
+              activeInbox={activeInbox}
+              onInboxChange={setActiveInbox}
+              activeFilter={activeFilter}
+              onFilterChange={handleFilterChange}
+              isOpen={sidebarOpen}
+              onClose={toggleSidebar}
+            />
+          </div>
+          <div className={`${mobileView === 'chat' ? 'hidden md:block' : ''}`}>
+            <ChatList
+              loading={loading}
+              contacts={contacts}
+              channels={channels}
+              selectedContactId={selectedContactId}
+              onContactSelect={handleContactSelect}
+              onChannelSelect={handleChannelSelect}
+              activeInbox={activeInbox}
+              activeFilter={activeFilter}
+            />
+          </div>
+          <div className={`${mobileView === 'list' ? 'hidden md:block' : ''}`}>
+            <ChatWindow loading={chatLoading} contact={activeConversation} messages={chatMessages} onSendMessage={handleSendMessage} onBack={handleBackToList} />
+          </div>
+          <div className={`${mobileView === 'list' ? 'hidden md:block' : ''}`}>
+            <DetailsPanel loading={loading} contactId={selectedContactId} activeFilter={activeFilter} channels={channels} onChannelSelect={handleChannelSelect} />
+          </div>
         </div>
       </section>
     </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FiChevronDown, FiMail, FiUser, FiUsers, FiPlus, FiMessageSquare, FiPlus as FiAddIcon } from 'react-icons/fi';
+import { FiChevronDown, FiPlus, FiPlus as FiAddIcon } from 'react-icons/fi';
 import {
   Channel,
   ChannelProfile,

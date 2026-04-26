@@ -131,9 +131,10 @@ interface ChatWindowProps {
   contact: Conversation;
   messages: Message[];
   onSendMessage?: (text: string) => void;
+  onBack?: () => void;
 }
 
-function ChatWindow({ loading = false, contact, messages, onSendMessage }: ChatWindowProps) {
+function ChatWindow({ loading = false, contact, messages, onSendMessage, onBack }: ChatWindowProps) {
   const [inputText, setInputText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -213,6 +214,13 @@ function ChatWindow({ loading = false, contact, messages, onSendMessage }: ChatW
   return (
     <section className="max-h-[900px] rounded-[7px] bg-white  shadow-soft flex flex-col">
       <div className="mb-6 flex flex-wrap items-center p-[21px] justify-between gap-4 border-b border-slate-200 pb-5">
+        {onBack && (
+          <button onClick={onBack} className="md:hidden p-2">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        )}
         <div>
           <div className="text-lg font-semibold tracking-tight text-slate-900">{contact?.name ?? 'Loading...'}</div>
         

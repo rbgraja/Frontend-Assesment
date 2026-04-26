@@ -318,7 +318,7 @@ function AssessmentDashboard({
       <section className="relative mx-auto flex min-h-screen w-full max-w-[1680px] flex-col overflow-hidden rounded-[22px] border border-blue-100/20 bg-white/[0.03] px-6 pb-6 pt-8 backdrop-blur-md lg:px-12">
         <div className="pointer-events-none absolute inset-0 rounded-[22px] shadow-[inset_0_0_0_1px_rgba(125,182,255,0.15)]" />
 
-        <div className="relative h-[440px] w-full">
+        <div className="relative h-[320px] md:h-[440px] w-full">
           <div className="pointer-events-none absolute left-1/2 top-[50%] h-[290px] w-[290px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(78,140,255,0.2)_0%,rgba(54,119,255,0.12)_35%,transparent_68%)] blur-[6px]" />
           <img
             src="/src/public/image.gif"
@@ -376,10 +376,10 @@ function AssessmentDashboard({
           })}
 
           <div className="pointer-events-none absolute inset-x-0 top-[84%] -translate-y-1/2">
-            <h1 className="text-center text-[46px] font-semibold tracking-[-0.04em] text-white/95">
+            <h1 className="text-center text-[32px] md:text-[46px] font-semibold tracking-[-0.04em] text-white/95">
               Extracting Information...
             </h1>
-            <p className="mx-auto mt-3 max-w-[560px] text-center text-[13px] leading-[1.35] text-blue-100/80">
+            <p className="mx-auto mt-3 max-w-[320px] md:max-w-[560px] text-center text-[12px] md:text-[13px] leading-[1.35] text-blue-100/80">
               We are extracting information from the above honey combs to your
               system
             </p>
