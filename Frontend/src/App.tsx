@@ -192,9 +192,21 @@ function App() {
   }
 
   return (
+    
     <div className="bg-[#eff3fa]">
-      <section className="min-h-screen p-4 sm:p-6">
+    {page === 'chat' && (
+  <div className="mb-1">
+    <button
+      onClick={() => setPage('assessment')}
+      className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-600 bg-slate-100 rounded-md hover:bg-slate-200 transition"
+    >
+      ← Home
+    </button>
+  </div>
+)}
+      <section className="min-h-screen p-4  sm:p-6 sm:pt-1">
         <Navbar loading={loading} mobileView={mobileView} selectedContact={activeConversation} onBack={handleBackToList} sidebarOpen={sidebarOpen} onToggleSidebar={toggleSidebar} />
+      
         <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_320px_minmax(0,1fr)_320px]">
           <div className={`${mobileView === 'chat' ? 'hidden md:block' : ''}`}>
             <Sidebar
