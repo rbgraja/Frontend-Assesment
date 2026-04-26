@@ -242,7 +242,7 @@ function AssessmentDashboard({
           {/* Radial glow behind centre */}
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[200px] w-[200px] sm:h-[290px] sm:w-[290px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(78,140,255,0.2)_0%,rgba(54,119,255,0.12)_35%,transparent_68%)] blur-[6px]" />
           <img
-            src="/src/public/image.gif"
+            src="/image.gif"
             alt="Animated ring"
             className="pointer-events-none absolute left-1/2 top-1/2 h-[200px] w-[200px] sm:h-[290px] sm:w-[290px] -translate-x-1/2 -translate-y-1/2 object-contain mix-blend-screen opacity-68 [filter:brightness(2.35)_contrast(2.05)_saturate(1.45)] [clip-path:circle(37%_at_50%_50%)]"
           />
@@ -380,7 +380,7 @@ function LivePanel({
 }) {
   return (
     <div className="h-full">
-      <img src="/src/assets/dashboard.PNG" alt="" className="w-full h-auto object-contain" />
+      <img src="/dashboard.PNG" alt="" className="w-full h-auto object-contain" />
     </div>
   );
 }
